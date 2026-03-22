@@ -1,0 +1,208 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Species {
+  id                String   @id @default(cuid())
+  name              String   @unique
+  slug              String   @unique
+  icon              String   @default("🐟")
+  color             String   @default("#C8A55A")
+  zone              Zone
+  season            String
+  peakSeason        String
+  primeHour         String   @db.Text
+  avgSize           String
+  bagLimit          String
+  sizeLimit         String
+  migrationPatterns String   @db.Text
+  idealTides        String
+  idealDepths       String   @db.Text
+  waterTemp         String
+  bait              String   @db.Text
+  gear              String   @db.Text
+  visionAndColor    String   @db.Text
+  filletRules       String   @db.Text
+  mustKnow          String   @db.Text
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  updates      SpeciesUpdate[]
+  catchReports CatchReport[]
+  userTips     UserTip[]
+  comments     Comment[]
+
+  @@map("species")
+}
+
+enum Zone {
+  NEARSHORE
+  OFFSHORE
+}
+
+model SpeciesUpdate {
+  id              String           @id @default(cuid())
+  speciesId       String
+  species         Species          @relation(fields: [speciesId], references: [id])
+  fieldChanged    String
+  oldValue        String?          @db.Text
+  newValue        String           @db.Text
+  sourceUrl       String?
+  sourceType      SourceType
+  confidenceScore Float            @default(0.5)
+  reviewed        Boolean          @default(false)
+  reviewedBy      String?
+  createdAt       DateTime         @default(now())
+
+  @@map("species_updates")
+}
+
+enum SourceType {
+  REGULATION
+  RESEARCH
+  COMMUNITY
+  MANUAL
+}
+
+model User {
+  id              String   @id @default(cuid())
+  email           String   @unique
+  displayName     String?
+  passwordHash    String?
+  authProvider    String   @default("email")
+  reputationScore Int      @default(0)
+  createdAt       DateTime @default(now())
+
+  catchReports CatchReport[]
+  userTips     UserTip[]
+  comments     Comment[]
+
+  @@map("users")
+}
+
+model CatchReport {
+  id                  String   @id @default(cuid())
+  userId              String
+  user                User     @relation(fields: [userId], references: [id])
+  speciesId           String
+  species             Species  @relation(fields: [speciesId], references: [id])
+  dateCaught          DateTime
+  locationLat         Float?
+  locationLng         Float?
+  locationDescription String?
+  sizeCaught          String?
+  baitUsed            String?
+  gearUsed            String?
+  tideConditions      String?
+  waterTempObserved   String?
+  timeOfDay           String?
+  weatherConditions   String?
+  notes               String?  @db.Text
+  photoUrl            String?
+  verified            Boolean  @default(false)
+  createdAt           DateTime @default(now())
+
+  comments Comment[]
+
+  @@map("catch_reports")
+}
+
+model UserTip {
+  id        String      @id @default(cuid())
+  userId    String
+  user      User        @relation(fields: [userId], references: [id])
+  speciesId String
+  species   Species     @relation(fields: [speciesId], references: [id])
+  tipText   String      @db.Text
+  category  TipCategory
+  upvotes   Int         @default(0)
+  downvotes Int         @default(0)
+  flagged   Boolean     @default(false)
+  createdAt DateTime    @default(now())
+
+  @@map("user_tips")
+}
+
+enum TipCategory {
+  BAIT
+  GEAR
+  LOCATION
+  TECHNIQUE
+  REGULATION
+  OTHER
+}
+
+model Comment {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+  speciesId       String?
+  species         Species? @relation(fields: [speciesId], references: [id])
+  catchReportId   String?
+  catchReport     CatchReport? @relation(fields: [catchReportId], references: [id])
+  parentCommentId String?
+  parentComment   Comment? @relation("CommentThread", fields: [parentCommentId], references: [id])
+  childComments   Comment[] @relation("CommentThread")
+  body            String   @db.Text
+  createdAt       DateTime @default(now())
+
+  @@map("comments")
+}
+
+model ScanSource {
+  id            String        @id @default(cuid())
+  name          String
+  url           String
+  scanFrequency ScanFrequency
+  sourceType    ScanSourceType
+  lastScannedAt DateTime?
+  isActive      Boolean       @default(true)
+  createdAt     DateTime      @default(now())
+
+  scanResults ScanResult[]
+
+  @@map("scan_sources")
+}
+
+enum ScanFrequency {
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+
+enum ScanSourceType {
+  REGULATION
+  WEATHER
+  RESEARCH
+  NEWS
+}
+
+model ScanResult {
+  id                 String     @id @default(cuid())
+  sourceId           String
+  source             ScanSource @relation(fields: [sourceId], references: [id])
+  rawContent         String?    @db.Text
+  summary            String?    @db.Text
+  speciesIdsAffected String[]
+  actionRequired     Boolean    @default(false)
+  actionTaken        String?    @db.Text
+  scannedAt          DateTime   @default(now())
+
+  @@map("scan_results")
+}
+
+model GeneralInfo {
+  id       String @id @default(cuid())
+  category String
+  key      String
+  value    String @db.Text
+  sortOrder Int   @default(0)
+
+  @@unique([category, key])
+  @@map("general_info")
+}
