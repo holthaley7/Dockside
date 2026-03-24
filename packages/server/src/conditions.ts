@@ -30,10 +30,10 @@ export interface CurrentConditions {
   fetchedAt: string;
 }
 
-// Simple in-memory cache (5 minutes)
+// Simple in-memory cache (2 minutes)
 let cachedConditions: CurrentConditions | null = null;
 let cacheTime = 0;
-const CACHE_TTL = 5 * 60 * 1000;
+const CACHE_TTL = 2 * 60 * 1000;
 
 async function fetchTides(): Promise<TidePrediction[]> {
   const url =
@@ -57,8 +57,8 @@ async function fetchTides(): Promise<TidePrediction[]> {
 }
 
 async function fetchBuoyData(): Promise<BuoyData | null> {
-  // Scripps Pier buoy (46254) — fallback to La Jolla (46232)
-  for (const station of ["46254", "46232"]) {
+  // 46047 Tanner Banks (offshore San Diego) — fallback to Scripps Pier (46254), then La Jolla (46232)
+  for (const station of ["46047", "46254", "46232"]) {
     try {
       const url = `https://www.ndbc.noaa.gov/data/realtime2/${station}.txt`;
       const res = await fetch(url, { signal: AbortSignal.timeout(10000) });

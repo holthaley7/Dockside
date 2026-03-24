@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { fetchSpeciesBySlug, type Species } from "../lib/api";
+import { useViewMode } from "../context/ViewModeContext";
 
 type Tab = "overview" | "tactics" | "regulations" | "community";
 
@@ -28,6 +29,7 @@ function InfoCard({
 
 export default function SpeciesDetail() {
   const { slug } = useParams<{ slug: string }>();
+  const { compact } = useViewMode();
   const [species, setSpecies] = useState<Species | null>(null);
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState<Tab>("overview");
@@ -53,7 +55,7 @@ export default function SpeciesDetail() {
     return (
       <div className="max-w-6xl mx-auto px-4 py-20 text-center">
         <p className="text-gray-400 font-mono">Species not found</p>
-        <Link to="/" className="text-sand text-sm font-mono mt-4 inline-block">
+        <Link to="/species" className="text-sand text-sm font-mono mt-4 inline-block">
           &larr; Back to species
         </Link>
       </div>
@@ -68,21 +70,39 @@ export default function SpeciesDetail() {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className={`${compact ? "max-w-xl" : "max-w-6xl"} mx-auto px-4 py-8 transition-all`}>
       {/* Breadcrumb */}
       <Link
-        to="/"
+        to="/species"
         className="text-sm font-mono text-gray-500 hover:text-sand transition-colors mb-6 inline-block"
       >
         &larr; All Species
       </Link>
 
       {/* Header */}
-      <div className="flex items-start gap-4 mb-8">
-        <span className="text-4xl">{species.icon}</span>
-        <div>
-          <h1 className="text-3xl font-bold text-gray-100">{species.name}</h1>
-          <div className="flex items-center gap-3 mt-2">
+      <div className={`flex ${compact ? "flex-col" : "items-start"} gap-5 mb-8`}>
+        {/* Fish photo */}
+        <div
+          className={`rounded-xl overflow-hidden bg-navy-950 flex items-center justify-center ${
+            compact ? "w-full h-44" : "flex-shrink-0"
+          }`}
+          style={compact ? undefined : { width: 180, height: 120 }}
+        >
+          {species.imageUrl ? (
+            <img
+              src={species.imageUrl}
+              alt={species.name}
+              className="w-full h-full object-contain p-2"
+            />
+          ) : (
+            <span className="text-5xl">{species.icon}</span>
+          )}
+        </div>
+
+        {/* Name & meta */}
+        <div className={compact ? "" : "pt-1"}>
+          <h1 className="text-3xl font-bold text-gray-100 mb-3">{species.name}</h1>
+          <div className="flex items-center gap-3">
             <span
               className={`text-xs font-mono px-2 py-0.5 rounded-full ${
                 species.zone === "OFFSHORE"
@@ -101,7 +121,7 @@ export default function SpeciesDetail() {
 
       {/* Tabs */}
       <div className="border-b border-navy-700/50 mb-8">
-        <div className="flex gap-1">
+        <div className="flex gap-1 overflow-x-auto scrollbar-hide">
           {tabs.map((t) => (
             <button
               key={t.id}
@@ -124,7 +144,7 @@ export default function SpeciesDetail() {
       {/* Tab Content */}
       {tab === "overview" && (
         <div className="space-y-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className={`grid gap-4 ${compact ? "grid-cols-1" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"}`}>
             <InfoCard icon="📏" label="Average Size" value={species.avgSize} />
             <InfoCard icon="🌡️" label="Water Temp" value={species.waterTemp} />
             <InfoCard icon="📅" label="Season" value={species.season} />
@@ -186,7 +206,7 @@ export default function SpeciesDetail() {
 
       {tab === "regulations" && (
         <div className="space-y-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className={`grid gap-4 ${compact ? "grid-cols-1" : "grid-cols-1 sm:grid-cols-2"}`}>
             <div className="bg-navy-800/60 border border-navy-700/40 rounded-lg p-5">
               <span className="text-xs font-mono text-gray-500 uppercase tracking-wider block mb-1">
                 Bag Limit

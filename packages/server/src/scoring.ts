@@ -7,6 +7,7 @@ interface SpeciesData {
   name: string;
   slug: string;
   icon: string;
+  imageUrl: string | null;
   color: string;
   zone: string;
   season: string;
@@ -25,6 +26,7 @@ export interface ScoredSpecies {
   name: string;
   slug: string;
   icon: string;
+  imageUrl: string | null;
   color: string;
   zone: string;
   avgSize: string;
@@ -255,6 +257,7 @@ export function scoreSpecies(
         name: s.name,
         slug: s.slug,
         icon: s.icon,
+        imageUrl: s.imageUrl,
         color: s.color,
         zone: s.zone,
         avgSize: s.avgSize,

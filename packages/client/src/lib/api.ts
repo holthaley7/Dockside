@@ -5,6 +5,7 @@ export interface SpeciesListItem {
   name: string;
   slug: string;
   icon: string;
+  imageUrl: string | null;
   color: string;
   zone: "NEARSHORE" | "OFFSHORE";
   season: string;
@@ -90,6 +91,7 @@ export interface ScoredSpecies {
   name: string;
   slug: string;
   icon: string;
+  imageUrl: string | null;
   color: string;
   zone: string;
   avgSize: string;

@@ -5,6 +5,7 @@ import {
   type RecommendationsResponse,
   type ScoredSpecies,
 } from "../lib/api";
+import { useViewMode } from "../context/ViewModeContext";
 
 const ratingConfig = {
   great: { label: "Great", bg: "bg-green-900/40", text: "text-green-400", border: "border-green-800/50" },
@@ -99,50 +100,78 @@ function ScoreBreakdown({ factors }: { factors: ScoredSpecies["factors"] }) {
 
 function RecommendationCard({ species }: { species: ScoredSpecies }) {
   const [expanded, setExpanded] = useState(false);
+  const { compact } = useViewMode();
   const config = ratingConfig[species.rating];
 
   return (
-    <div className="bg-navy-800/50 border border-navy-700/50 rounded-xl p-4 hover:border-sand/20 transition-all">
-      <div className="flex items-start justify-between">
+    <div className="bg-navy-800/50 border border-navy-700/50 rounded-xl overflow-hidden hover:border-sand/20 transition-all">
+      <div className={`flex ${compact ? "flex-col" : "flex-row"}`}>
+        {/* Fish image */}
         <Link
           to={`/species/${species.slug}`}
-          className="flex items-center gap-3 group flex-1"
+          className={`bg-navy-950 flex items-center justify-center group ${
+            compact ? "w-full h-36" : "flex-shrink-0 w-36"
+          }`}
         >
-          <span className="text-2xl">{species.icon}</span>
-          <div>
-            <h4 className="text-base font-semibold text-gray-100 group-hover:text-sand transition-colors">
-              {species.name}
-            </h4>
-            <p className="text-xs font-mono text-gray-500 mt-0.5">
+          {species.imageUrl ? (
+            <img
+              src={species.imageUrl}
+              alt={species.name}
+              className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500"
+            />
+          ) : (
+            <span className="text-4xl">{species.icon}</span>
+          )}
+        </Link>
+
+        {/* Info */}
+        <div className="flex-1 p-4 flex gap-3 min-w-0">
+          {/* Left: name, reason, stats */}
+          <div className="flex-1 flex flex-col gap-3 min-w-0">
+            <Link to={`/species/${species.slug}`} className="group min-w-0">
+              <h4 className="text-lg font-semibold text-gray-100 group-hover:text-sand transition-colors leading-tight truncate">
+                {species.name}
+              </h4>
+            </Link>
+            <p className="text-sm font-mono text-gray-400 truncate">
               {species.reason}
             </p>
+            <div className="grid grid-cols-3 gap-2">
+              <div className="bg-navy-900/60 rounded px-2 py-1">
+                <span className="text-[10px] font-mono text-gray-600 uppercase tracking-wide block">Zone</span>
+                <span className="text-xs font-mono text-gray-300 capitalize">{species.zone.toLowerCase()}</span>
+              </div>
+              <div className="bg-navy-900/60 rounded px-2 py-1">
+                <span className="text-[10px] font-mono text-gray-600 uppercase tracking-wide block">Avg Size</span>
+                <span className="text-xs font-mono text-gray-300">{species.avgSize}</span>
+              </div>
+              <div className="bg-navy-900/60 rounded px-2 py-1">
+                <span className="text-[10px] font-mono text-gray-600 uppercase tracking-wide block">Limit</span>
+                <span className="text-xs font-mono text-gray-300">{species.bagLimit}</span>
+              </div>
+            </div>
+            {expanded && <ScoreBreakdown factors={species.factors} />}
           </div>
-        </Link>
-        <div className="flex items-center gap-2">
-          <span className="text-lg font-bold font-mono text-gray-200">
-            {species.score}
-          </span>
-          <span
-            className={`text-xs font-mono px-2 py-0.5 rounded-full border ${config.bg} ${config.text} ${config.border}`}
-          >
-            {config.label}
-          </span>
+
+          {/* Right: score, rating, breakdown */}
+          <div className="flex flex-col items-end gap-1 flex-shrink-0">
+            <div className="flex items-center gap-2">
+              <span className="text-2xl font-bold font-mono text-gray-200 leading-none">
+                {species.score}
+              </span>
+              <span className={`text-xs font-mono px-2 py-0.5 rounded-full border ${config.bg} ${config.text} ${config.border}`}>
+                {config.label}
+              </span>
+            </div>
+            <button
+              onClick={() => setExpanded(!expanded)}
+              className="text-xs font-mono text-sand/60 hover:text-sand transition-colors"
+            >
+              {expanded ? "hide" : "breakdown"}
+            </button>
+          </div>
         </div>
       </div>
-
-      <div className="flex items-center gap-4 mt-3 text-xs font-mono text-gray-500">
-        <span>{species.zone.toLowerCase()}</span>
-        <span>{species.avgSize}</span>
-        <span>Limit: {species.bagLimit}</span>
-        <button
-          onClick={() => setExpanded(!expanded)}
-          className="ml-auto text-sand/60 hover:text-sand transition-colors"
-        >
-          {expanded ? "hide details" : "score breakdown"}
-        </button>
-      </div>
-
-      {expanded && <ScoreBreakdown factors={species.factors} />}
     </div>
   );
 }
@@ -202,18 +231,18 @@ export default function WhatsBiting() {
     <div className="bg-navy-800/30 border border-sand/10 rounded-2xl p-6 mb-10">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h2 className="text-xl font-bold text-gray-100 flex items-center gap-2">
-            <span>🎣</span> What's Biting Now
+          <h2 className="text-3xl font-bold text-gray-100">
+            What's Biting Now
           </h2>
-          <p className="text-xs font-mono text-gray-500 mt-1">
+          <p className="text-sm font-mono text-gray-500 mt-1">
             Live conditions · Scored against each species' preferences · Updates every 5 min
           </p>
         </div>
         <div className="text-right">
-          <p className="text-[11px] font-mono text-gray-600">
+          <p className="text-[9px] font-mono text-gray-600">
             Data from NOAA Tides · NDBC Buoy · NWS Weather
           </p>
-          <p className="text-[11px] font-mono text-gray-600">
+          <p className="text-[9px] font-mono text-gray-600">
             Last updated:{" "}
             {new Date(data.conditions.fetchedAt).toLocaleTimeString()}
           </p>

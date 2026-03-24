@@ -12,6 +12,7 @@ model Species {
   name              String   @unique
   slug              String   @unique
   icon              String   @default("🐟")
+  imageUrl          String?
   color             String   @default("#C8A55A")
   zone              Zone
   season            String
