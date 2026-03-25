@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useViewMode } from "../context/ViewModeContext";
+import DocksideLogo from "./DocksideLogo";
 
 function MonitorIcon() {
   return (
@@ -62,23 +63,17 @@ export default function Layout() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="border-b border-navy-700/50 bg-navy-900/90 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between gap-3">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group flex-shrink-0" onClick={handleNavClick}>
-            <span className="text-3xl">⚓</span>
-            <div>
-              <h1 className="text-2xl font-bold text-sand tracking-wide font-serif leading-none">
-                Dockside
-              </h1>
-              <p className="text-xs font-mono text-gray-600 tracking-widest uppercase mt-1 hidden sm:block">
-                San Diego Sport Fishing
-              </p>
-            </div>
-          </Link>
+    <>
+      {/* Logo — scrolls with page, not sticky */}
+      <div className="bg-navy-900 border-b border-navy-700/20 flex justify-center py-5">
+        <Link to="/" onClick={handleNavClick}>
+          <DocksideLogo size={160} />
+        </Link>
+      </div>
 
-          {/* Desktop nav */}
+      {/* Sticky nav — plain block element, no flex parent, sticks to viewport */}
+      <header className="border-b border-navy-700/50 bg-navy-900/90 backdrop-blur-sm sticky top-0 z-50">
+        <div className="max-w-5xl mx-auto px-4 py-3 relative flex items-center justify-center">
           <nav className="hidden sm:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
@@ -96,8 +91,7 @@ export default function Layout() {
           </nav>
 
           {/* Right controls */}
-          <div className="flex items-center gap-2">
-            {/* View toggle */}
+          <div className="absolute right-2 flex items-center gap-2">
             <button
               onClick={toggle}
               title={compact ? "Switch to desktop view" : "Switch to mobile view"}
@@ -109,7 +103,6 @@ export default function Layout() {
               </span>
             </button>
 
-            {/* Mobile hamburger */}
             <button
               className="sm:hidden p-1.5 text-gray-400 hover:text-gray-200 transition-colors"
               onClick={() => setMenuOpen((o) => !o)}
@@ -141,7 +134,7 @@ export default function Layout() {
         )}
       </header>
 
-      <main className="flex-1">
+      <main className="min-h-screen">
         <Outlet />
       </main>
 
@@ -153,6 +146,6 @@ export default function Layout() {
           </p>
         </div>
       </footer>
-    </div>
+    </>
   );
 }

@@ -1,9 +1,11 @@
+// Dockside API — San Diego sport fishing intelligence
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
 import { getConditions } from "./conditions";
 import { scoreSpecies } from "./scoring";
+import { refreshFishWatchData, getLatestFishWatchResult } from "./fishWatch";
 
 dotenv.config({ path: "../../.env" });
 
@@ -60,7 +62,7 @@ app.get("/api/species", async (_req, res) => {
   }
 });
 
-// Get single species by slug
+// Get single species by slug (includes latest FishWatch stock status)
 app.get("/api/species/:slug", async (req, res) => {
   try {
     const species = await prisma.species.findUnique({
@@ -72,7 +74,8 @@ app.get("/api/species/:slug", async (req, res) => {
       return;
     }
 
-    res.json(species);
+    const stockStatus = await getLatestFishWatchResult(prisma, species.id);
+    res.json({ ...species, stockStatus: stockStatus ?? null });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch species" });
@@ -154,6 +157,26 @@ app.get("/api/recommendations", async (_req, res) => {
   }
 });
 
+// Manual refresh trigger (admin use)
+app.post("/api/admin/refresh-fishwatch", async (_req, res) => {
+  try {
+    await refreshFishWatchData(prisma);
+    res.json({ ok: true, message: "FishWatch refresh complete" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Refresh failed" });
+  }
+});
+
+const MS_PER_HOUR = 60 * 60 * 1000;
+const FISHWATCH_REFRESH_INTERVAL = 24 * MS_PER_HOUR;
+
 app.listen(PORT, () => {
   console.log(`Dockside API running on http://localhost:${PORT}`);
+
+  // Run FishWatch refresh on startup, then every 24 hours
+  refreshFishWatchData(prisma).catch(console.error);
+  setInterval(() => {
+    refreshFishWatchData(prisma).catch(console.error);
+  }, FISHWATCH_REFRESH_INTERVAL);
 });

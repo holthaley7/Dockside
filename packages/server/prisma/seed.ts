@@ -37,6 +37,23 @@ const speciesData = [
       "Each fish must be cut into six specific pieces (four loins, the collar with pectoral fin attached, and the tail). Additionally, one pectoral fin must remain attached to the collar section of each fish for identification purposes.",
     mustKnow:
       "Regardless of the number of passengers, a vessel may not have more than 20 bluefin tuna on board at any time. As of August 2024, the daily bag limit for Pacific bluefin tuna is 2 fish per angler.",
+    locations: JSON.stringify([
+      { name: "9-Mile Bank", note: "One of the most consistent BFT grounds off San Diego; strong underwater structure holds bait schools and concentrates fish throughout the season." },
+      { name: "Coronado Islands", note: "Just 15 miles south in Mexican waters; kelp paddies and warm upwellings attract bluefin chasing anchovies and sardines." },
+      { name: "Hidden Bank (182 Spot)", note: "Deep offshore bank where temperature breaks concentrate tuna in summer; long run but consistently productive for large fish." },
+      { name: "Offshore kelp paddies (30–50 mi)", note: "Floating kelp mats well offshore draw bluefin in summer; birds working the surface signal fish below the mat." },
+    ]),
+    communityTips: JSON.stringify([
+      { category: "Timing", tip: "The SD bluefin bite peaks June–October. Watch SST charts on Hilton's Offshore or Saavy Navvy for 60°F+ breaks moving north — that's your green light to run offshore." },
+      { category: "Local Trick", tip: "When fish are lock-jawed on surface iron, drop a flat-fall or knife jig to the meter marks. SD bluefin have seen heavy iron pressure — going deep triggers bites when nothing else works." },
+      { category: "Bait Shop", tip: "H&M Landing and Seaforth Landing (both Point Loma) are the go-to full-service landings. They carry live bait, have tackle shops on site, and staff know what's biting offshore." },
+      { category: "SD Tip", tip: "San Diego bluefin are notoriously line-shy. Local veterans use fluorocarbon leaders as light as 40 lb even on large fish — don't go heavy just because the fish are big." },
+    ]),
+    communityPosts: JSON.stringify([
+      { username: "MarlinMike_SD", date: "Oct 14, 2024", time: "6:42 AM", location: "9-Mile Bank", weight: "87 lbs", gear: "130lb Tiagra, flat-fall jig", note: "Found them on the meter marks after the surface bite shut down. Two hours of waiting paid off big." },
+      { username: "tuna_dan92037", date: "Aug 3, 2024", time: "5:15 AM", location: "Offshore kelp paddy (~48 mi SW)", weight: "112 lbs", bait: "Fly-lined sardine", tide: "Incoming", note: "Paddy was lit up at first light. Fish was in the boat by 7am." },
+      { username: "Coronado_Caster", date: "Sep 22, 2024", time: "4:58 PM", location: "Coronado Islands", weight: "64 lbs", gear: "40lb spinning, knife jig", waterTemp: "68°F" },
+    ]),
   },
   {
     name: "Calico Bass (Kelp Bass)",
@@ -65,6 +82,23 @@ const speciesData = [
       "Fillets must be at least 7.5 inches long and must bear a one-inch square patch of skin for identification. Fish may be filleted at sea.",
     mustKnow:
       "Kelp bass (calico), barred sand bass, and spotted sand bass are managed under a combined 5-fish aggregate bag limit. Any combination of these three species may be taken as long as the total does not exceed 5.",
+    locations: JSON.stringify([
+      { name: "La Jolla Kelp Beds", note: "The richest kelp canopy in San Diego; dense structure and consistent water temps hold large calico year-round." },
+      { name: "Point Loma Kelp Forest", note: "Miles of protected kelp along the peninsula offer rocky edges and thick canopy that produce consistent action." },
+      { name: "Coronado Islands", note: "Less-pressured kelp forests just south of the border hold trophy calico; accessible by charter or private boat." },
+      { name: "Del Mar / Solana Beach Kelp", note: "North county kelp beds offer good numbers of fish with lighter boat traffic than Point Loma and La Jolla." },
+    ]),
+    communityTips: JSON.stringify([
+      { category: "Timing", tip: "May through October is prime, but La Jolla and Point Loma kelp hold calico year-round. Water temp above 62°F moves them higher in the column and makes them more aggressive on swimbaits." },
+      { category: "Local Trick", tip: "At La Jolla, anchor up-current of a kelp paddy at dawn and drift swimbaits along the outer edge. Big fish hold in the darkest, thickest kelp — don't just fish the edge, punch into the canopy." },
+      { category: "Bait Shop", tip: "Squidco (Morena Blvd) and Fisherman's Landing tackle shop are local favorites. Squidco carries an especially strong selection of local swimbaits in colors proven on SD calico." },
+      { category: "SD Tip", tip: "Most serious local anglers release legal calico — the La Jolla beds have been recovering and the big fish reward C&R. Target areas around the outer kelp buoys for the largest specimens." },
+    ]),
+    communityPosts: JSON.stringify([
+      { username: "KelpQueen_SD", date: "Jun 7, 2024", time: "7:20 AM", location: "La Jolla Kelp Beds", weight: "4.2 lbs", bait: "Live anchovy", note: "First keeper of the season off the outer edge. Released her after the photo." },
+      { username: "PointLoma_Pete", date: "Aug 19, 2024", time: "6:05 AM", location: "Point Loma Kelp Forest", weight: "3.8 lbs", gear: "Swimbait on 15lb fluoro", tide: "Outgoing" },
+      { username: "sd_bass_crew", date: "May 30, 2024", time: "8:45 AM", location: "Coronado Islands", weight: "6.1 lbs", note: "Personal best! Hit right at the kelp edge on a big swimbait. Released her — she deserved it." },
+    ]),
   },
   {
     name: "Mahi-Mahi (Dorado)",
@@ -93,6 +127,22 @@ const speciesData = [
       "Fillets may be of any size but must bear an intact one-inch square patch of skin for species identification.",
     mustKnow:
       "While not legally required, it is considered ethical to limit yourself to 6 fish per voyage and to only keep fish at least 28 inches in length.",
+    locations: JSON.stringify([
+      { name: "Offshore kelp paddies (50–80 miles)", note: "Floating kelp mats in warm blue water are the primary mahi magnet; target mats with birds working overhead or debris fields." },
+      { name: "Coronado Islands vicinity", note: "The islands break currents and collect floating debris that attract mahi during warm-water years." },
+      { name: "9-Mile Bank", note: "Temperature breaks near the bank hold bait and attract mahi trolling through in summer and fall." },
+      { name: "Tanner & Cortez Banks", note: "Distant offshore banks (100+ miles) produce mahi in peak season when warm water pushes far north." },
+    ]),
+    communityTips: JSON.stringify([
+      { category: "Timing", tip: "Mahi arrive when SST hits 72°F+, typically late July through October. Hot years push them within 50 miles; cold years may require 80-mile runs. Check SST charts before committing to the run." },
+      { category: "Local Trick", tip: "When you find a kelp paddy, don't motor through it. Approach quietly and pitch a live sardine to the edge. Mahi materialize instantly if they're present — and keep one in the water while landing others to hold the school." },
+      { category: "Bait Shop", tip: "Point Loma Sportfishing and H&M Landing are the main departure points for offshore trips. Call ahead — when mahi are biting, live bait sells out fast." },
+      { category: "SD Tip", tip: "Keep one mahi in the water while landing others — the splashing keeps the school excited. This 'teaser fish' technique is standard practice among experienced SD offshore anglers." },
+    ]),
+    communityPosts: JSON.stringify([
+      { username: "DoradoDave_619", date: "Sep 5, 2024", time: "9:30 AM", location: "Kelp paddy, ~65 mi offshore", weight: "28 lbs", bait: "Live sardine", note: "Found three paddies in a row. Kept two, released the rest. Meat in the freezer!" },
+      { username: "blue_water_breeze", date: "Aug 12, 2024", time: "11:15 AM", location: "9-Mile Bank temperature break", weight: "19 lbs", gear: "Trolled cedar plug", waterTemp: "74°F", tide: "Slack" },
+    ]),
   },
   {
     name: "Yellowtail Amberjack",
@@ -121,6 +171,23 @@ const speciesData = [
       "Fillets must be at least 17 inches in length. There is an exception allowing for a partial fillet with a one-inch square patch of skin for identification.",
     mustKnow:
       "While the minimum size is 24 inches fork length, you are legally allowed to possess up to 5 fish under 24 inches — but any undersized fish count toward your 10-fish daily bag limit.",
+    locations: JSON.stringify([
+      { name: "Coronado Islands", note: "The most famous SD yellowtail destination; rocky kelp structure holds fish spring through fall and draws big mossbacks during the winter squid bite." },
+      { name: "La Jolla Kelp Beds", note: "Kelp canopy holds yellowtail near the surface during peak summer; fish stack up along the outer kelp edges and respond to surface iron." },
+      { name: "Point Loma", note: "Rocky points and kelp edges along the peninsula concentrate yellowtail on outgoing tides; closer to the dock than the islands." },
+      { name: "9-Mile Bank", note: "Deeper-water mossbacks (40+ lb) stack near rocky structure in winter; productive for large fish during the squid bite with dropper loop rigs." },
+    ]),
+    communityTips: JSON.stringify([
+      { category: "Timing", tip: "Spring through fall at the Coronado Islands is the classic pattern. The winter 'squid bite' (Dec–Feb) produces the biggest mossbacks — 40+ lb fish — but requires heavier tackle and an early start." },
+      { category: "Local Trick", tip: "When surface iron isn't working at the islands, drop a live squid or mackerel straight down under the boat. Island mossbacks don't always come topwater — they respond to vertical presentations below the chum line." },
+      { category: "Bait Shop", tip: "Fisherman's Landing (Shelter Island) is the premier departure point for Coronado Islands yellowtail trips. Their crews know the islands better than anyone and share current bite info at the landing." },
+      { category: "SD Tip", tip: "The Coronado Islands require a Mexican fishing license — buy one before your trip at Fisherman's Landing or online. Getting caught without one while fishing Mexican waters carries a steep fine." },
+    ]),
+    communityPosts: JSON.stringify([
+      { username: "IslandBound_SB", date: "Apr 28, 2024", time: "5:30 AM", location: "Coronado Islands – North Island", weight: "34 lbs", bait: "Live mackerel on dropper loop", tide: "Outgoing", note: "Squid bite was still going. Got this guy at 80ft. Biggest fish of my season." },
+      { username: "YTAddict619", date: "Jul 14, 2024", time: "7:05 AM", location: "La Jolla Kelp", weight: "22 lbs", gear: "Surface iron, scrambled egg color", note: "Wide open surface bite for 45 minutes at first light. Released two, kept one." },
+      { username: "Kelp_Chaser_SD", date: "Jun 3, 2024", time: "6:55 AM", location: "Point Loma kelp edge", weight: "18 lbs", tide: "Incoming", waterTemp: "66°F" },
+    ]),
   },
   {
     name: "Vermilion/Sunset Rockfish",
@@ -150,6 +217,22 @@ const speciesData = [
       "Fillets are required to have the entire skin attached. There is no minimum length for fillets as long as the skin is present for identification.",
     mustKnow:
       "Closed for boat-based anglers from January 1 through March 31, but can be taken year-round from shore. A descending device is mandatory on any vessel targeting or possessing rockfish.",
+    locations: JSON.stringify([
+      { name: "Coronado Canyon", note: "Deep rocky canyon walls south of the Coronado Islands; dense rockfish populations stack at 150–300 feet on the canyon edges." },
+      { name: "9-Mile Bank (deep structure)", note: "Rocky bottom pinnacles and ledges on the bank hold vermilion in large numbers; one of the most reliable SD rockfish spots." },
+      { name: "La Jolla Canyon", note: "Underwater canyon close to shore with deep rocky walls; accessible by short run and consistently productive for multiple rockfish species." },
+      { name: "Point Loma Reefs", note: "Rocky reef system extending offshore from the peninsula; reliable rockfish action at depth on the outer edges year-round." },
+    ]),
+    communityTips: JSON.stringify([
+      { category: "Timing", tip: "Available April through December for boat anglers. Early April trips after the winter closure often deliver the best numbers of the year — pent-up fish with minimal pressure." },
+      { category: "Local Trick", tip: "Fresh squid strips on dropper loops 1–2 feet off bottom produce the most consistent results. Change bait often — rockfish have a keen nose and fresh bait outperforms stale every time." },
+      { category: "Bait Shop", tip: "H&M Landing, Fisherman's Landing, and Seaforth all run rockfish combo trips and carry appropriate bottom-fishing gear. Staff share current depth and structure reports from recent trips." },
+      { category: "SD Tip", tip: "California law requires a descending device on any vessel targeting rockfish — bring a release weight or Shelton Descender. Releasing fish properly protects stock recovery and is now legally required." },
+    ]),
+    communityPosts: JSON.stringify([
+      { username: "BottomFisher_SD", date: "May 11, 2024", time: "8:00 AM", location: "9-Mile Bank", weight: "7.4 lbs", bait: "Squid strip on dropper loop", note: "Limit of 2 by 9am. Came up with a copper rockfish on the same drop — good day." },
+      { username: "ReefDiver619", date: "Nov 2, 2024", time: "7:30 AM", location: "La Jolla Canyon, 180ft", weight: "6.1 lbs", gear: "Heavy dropper loop, 14oz sinker", tide: "Outgoing" },
+    ]),
   },
   {
     name: "Yellowfin Croaker",
@@ -178,6 +261,23 @@ const speciesData = [
       "Fillets may be of any size but must bear a one-inch square patch of skin intact for species identification.",
     mustKnow:
       "You cannot sell yellowfin croaker caught recreationally, as California and Mexican regulations prohibit the sale of recreationally caught fish.",
+    locations: JSON.stringify([
+      { name: "Mission Beach Surf Zone", note: "Sandy surf with heavy sand crab concentrations; best on incoming tides in summer — wade the swash zone at dawn for the most action." },
+      { name: "Ocean Beach Pier Area", note: "Structure and current near the OB Pier concentrate croaker; easy shore access with consistent summer action." },
+      { name: "Silver Strand / Coronado Beach", note: "Long sandy beach south of Coronado with reliable surf action and noticeably less pressure than Mission Beach." },
+      { name: "Pacific Beach Surf", note: "Classic SoCal surf fishing for croaker; early morning incoming-tide sessions consistently produce from June through September." },
+    ]),
+    communityTips: JSON.stringify([
+      { category: "Timing", tip: "June through September is peak season. Best action comes 2 hours before and after high tide — croaker push into the wash zone to feed on sand crabs uncovered by wave action." },
+      { category: "Local Trick", tip: "Dig your own sand crabs from the swash zone where waves retreat — fresh live crabs dramatically outfish store-bought bait. Break them in half and thread on a size 4–6 hook with the soft belly exposed." },
+      { category: "Bait Shop", tip: "Squidco and bait shops near Mission Beach carry the essentials. For fresh blood worms and ghost shrimp (a solid backup when sand crabs are scarce), check shops near OB Pier." },
+      { category: "SD Tip", tip: "San Diego beach rangers occasionally check licenses and bag limits. Keep your license visible and know the 10-fish limit — this species is abundant but worth protecting for future seasons." },
+    ]),
+    communityPosts: JSON.stringify([
+      { username: "SurfSider_MB", date: "Jul 6, 2024", time: "5:50 AM", location: "Mission Beach surf zone", weight: "2.1 lbs", bait: "Fresh sand crab", tide: "Incoming high", note: "Caught 6 before 8am. Kept 4 for fish tacos that night — best of the summer." },
+      { username: "PierFisher_OB", date: "Aug 22, 2024", time: "6:15 AM", location: "Ocean Beach Pier area", weight: "1.8 lbs", bait: "Ghost shrimp" },
+      { username: "SilverStrandSam", date: "Jun 30, 2024", time: "7:00 AM", location: "Silver Strand Beach", weight: "2.6 lbs", bait: "Sand crab", tide: "High incoming", note: "Way quieter than MB and the fish were bigger. Definitely coming back." },
+    ]),
   },
   {
     name: "California Halibut",
@@ -206,6 +306,23 @@ const speciesData = [
       "Fillets must be at least 16.75 inches long with the entire skin intact.",
     mustKnow:
       "In waters south of Point Sur, the limit is 5 fish with a minimum size of 22 inches total length.",
+    locations: JSON.stringify([
+      { name: "Mission Bay", note: "One of the top halibut fisheries in SoCal; sandy channel bottoms and bay mouth areas hold fish year-round with peak action in spring." },
+      { name: "San Diego Bay", note: "Large protected bay with extensive sandy habitat; the main channel near Shelter Island and Coronado is a consistent producer." },
+      { name: "La Jolla Shores Flats", note: "Sandy flats north of the cove in 20–50 feet; drift fishing with live bait or swimbaits is highly effective in spring and early summer." },
+      { name: "Point Loma Sandy Patches", note: "Sandy bottom between kelp beds off the peninsula; large halibut stage here on outgoing tides targeting baitfish funneling out of the kelp." },
+    ]),
+    communityTips: JSON.stringify([
+      { category: "Timing", tip: "March through June is prime — halibut move from deep water onto sandy flats to spawn and the biggest fish of the year are caught during this window. Summer sees good numbers but smaller average size." },
+      { category: "Local Trick", tip: "In Mission Bay, try the 'Mission Bay drift' at night: anchor near the channel mouth, cast a 5\" white swimbait toward the shallows, and retrieve slowly along the bottom. Night fishing produces the largest fish." },
+      { category: "Bait Shop", tip: "Islandia Sportfishing at Mission Bay is the main halibut charter operation. Their tackle shop carries live bait (anchovies, smelt) and local guides share where fish are holding that week." },
+      { category: "SD Tip", tip: "The 22\" minimum is strictly enforced — measure carefully before keeping any fish. Short halibut in the 18–21\" range are easy to misjudge, and the fine is significant. When in doubt, release it." },
+    ]),
+    communityPosts: JSON.stringify([
+      { username: "FlatfishFan_SD", date: "Apr 5, 2024", time: "7:15 PM", location: "Mission Bay channel mouth", weight: "14.5 lbs", gear: "5\" white swimbait, 1oz jighead", note: "Night fishing finally paid off. Third cast at the channel. These things hit like a truck." },
+      { username: "LaJollaDrifter", date: "May 18, 2024", time: "9:45 AM", location: "La Jolla Shores flats, ~30ft", weight: "22 lbs", bait: "Live anchovy, two-hook rig", tide: "Slack", waterTemp: "62°F" },
+      { username: "BayBoss_619", date: "Mar 27, 2024", time: "6:30 AM", location: "Shelter Island channel, SD Bay", weight: "8 lbs", gear: "Swimbait, slow retrieve", note: "First one of the season. Water was cold but they're there." },
+    ]),
   },
   {
     name: "Spotted Sand Bass",
@@ -234,6 +351,23 @@ const speciesData = [
       "Fillets must be at least 7.5 inches long and must bear a one-inch square patch of skin for identification.",
     mustKnow:
       "Kelp bass (calico), barred sand bass, and spotted sand bass are managed under a combined 5-fish aggregate bag limit.",
+    locations: JSON.stringify([
+      { name: "Mission Bay", note: "The premier spot for sand bass in San Diego; extensive eelgrass beds and sandy structure hold fish year-round with peak spawning action May–August." },
+      { name: "San Diego Bay", note: "Large eelgrass flats throughout the bay; the Shelter Island area and near the Coronado Bridge produce consistent numbers of fish." },
+      { name: "Chula Vista / South Bay Flats", note: "Shallow eelgrass flats in South Bay hold spawning fish from May through August; sight fishing in clear, low water is possible on calm mornings." },
+      { name: "Glorietta Bay (Coronado)", note: "Small protected bay with dense eelgrass and shallow, clear water; excellent for sight-fishing cruising sand bass at low tide." },
+    ]),
+    communityTips: JSON.stringify([
+      { category: "Timing", tip: "May through August is spawning season and the most productive time. Fish move onto shallow eelgrass flats in Mission Bay — sight fishing to cruising fish in 2–4 feet of water is a local highlight." },
+      { category: "Local Trick", tip: "At Mission Bay, wade the eelgrass flats near De Anza Cove or Mariner's Basin at low tide. Sight cast a small ned rig or swimbait ahead of cruising fish — they'll often react immediately." },
+      { category: "Bait Shop", tip: "Islandia Sportfishing and local Mission Bay bait shops carry fresh ghost shrimp and blood worms — both excellent for sand bass. Ask about current eelgrass conditions, as grass locations shift seasonally." },
+      { category: "SD Tip", tip: "Sand bass, calico bass, and barred sand bass share a 5-fish aggregate limit — if you've kept 3 calico and 2 spotted sand bass, you're done for the day. Many local anglers keep a running tally on their phone." },
+    ]),
+    communityPosts: JSON.stringify([
+      { username: "EelgrassEric", date: "Jun 15, 2024", time: "7:30 AM", location: "Mission Bay – De Anza Cove flats", weight: "3.1 lbs", bait: "Live ghost shrimp", tide: "Low outgoing", note: "Sight fished 4 fish in the eelgrass before 9am. All released — water was crystal clear." },
+      { username: "BayWader_SD", date: "Aug 8, 2024", time: "8:00 AM", location: "Glorietta Bay, Coronado", weight: "2.4 lbs", gear: "Ned rig, 1/10oz, green pumpkin", note: "Water was super clear. Could actually see the fish pick up the bait. Insane." },
+      { username: "MissionBayMike", date: "Jul 22, 2024", time: "6:45 AM", location: "Mariner's Basin, Mission Bay", weight: "1.9 lbs", bait: "Ghost shrimp", tide: "Incoming" },
+    ]),
   },
   {
     name: "California Corbina",
@@ -262,6 +396,23 @@ const speciesData = [
       "Fillets may be any size but must have a one-inch square patch of skin left intact for identification.",
     mustKnow:
       "It is a serious offense to buy or sell any sport-caught California Corbina. Any Corbina found on a boat operating as a Commercial Passenger Fishing Vessel is presumed to be illegally possessed.",
+    locations: JSON.stringify([
+      { name: "Mission Beach Surf Zone", note: "Sandy surf with heavy sand crab populations; one of the most consistent corbina spots in SD from June through September." },
+      { name: "Ocean Beach Surf", note: "Consistent sandy bottom with good intertidal zones; wade at low tide with sand crabs for best results along the surf line." },
+      { name: "Coronado / Silver Strand Beach", note: "Long stretch of protected beach with steady corbina action and less crowding than Mission Beach; good access off the Silver Strand highway." },
+      { name: "La Jolla Shores", note: "Sandy beach south of the cove where corbina cruise the shallow wash zone; sight-fishing at dawn is a highlight for local surf anglers." },
+    ]),
+    communityTips: JSON.stringify([
+      { category: "Timing", tip: "June through September is peak season; best action at dawn on incoming tide. Corbina feed aggressively in the white water of the breaking surf — don't be afraid to wade into knee-deep wash." },
+      { category: "Local Trick", tip: "Stalking corbina at La Jolla Shores on calm mornings is a local tradition. Wear gray or tan clothing, wade slowly, and sight-cast a sand crab 3–4 feet ahead of a cruising fish. The take is explosive." },
+      { category: "Bait Shop", tip: "Squidco has the light finesse tackle used by SD corbina specialists. Ghost shrimp work when sand crabs are scarce — pick them up at bait shops near Mission Beach or OB." },
+      { category: "SD Tip", tip: "SD has a dedicated community of catch-and-release corbina anglers who consider them the premier SoCal surf game fish. Joining local surf fishing groups on Facebook connects you with current conditions and spot intel." },
+    ]),
+    communityPosts: JSON.stringify([
+      { username: "SurfStalker619", date: "Jul 20, 2024", time: "6:10 AM", location: "La Jolla Shores", weight: "5.8 lbs", bait: "Fresh sand crab", tide: "Incoming", note: "Spotted her cruising in 8 inches of water. Sight fished — she didn't hesitate. Released immediately." },
+      { username: "MissionBeachMo", date: "Aug 4, 2024", time: "5:45 AM", location: "Mission Beach surf zone", weight: "4.2 lbs", bait: "Ghost shrimp", waterTemp: "70°F" },
+      { username: "CasualCorb_SD", date: "Sep 1, 2024", time: "7:00 AM", location: "Coronado / Silver Strand", weight: "6.3 lbs", bait: "Sand crab", tide: "High incoming", note: "Personal best! Way less crowded than Mission Beach. Released after a quick photo." },
+    ]),
   },
   {
     name: "White Seabass",
@@ -290,6 +441,23 @@ const speciesData = [
       "Fillets must be at least 19 inches long and bear a one-inch square patch of silvery skin for identification.",
     mustKnow:
       "The limit is reduced to 1 fish between March 15 and June 15.",
+    locations: JSON.stringify([
+      { name: "La Jolla Kelp Beds", note: "Prime spawning habitat; WSB stack along kelp edges during the March–June squid run and respond aggressively to live squid fished at night." },
+      { name: "Point Loma Kelp Edges", note: "Night fishing along kelp lines with live squid is the proven local technique during spawn season — the outer kelp edge after dark is the sweet spot." },
+      { name: "Coronado Islands", note: "Rocky kelp structure south of the border holds large WSB year-round; charter boats consistently score here during the prime spawn window." },
+      { name: "Mission Bay Channel Entrance", note: "Large WSB cruise the channel mouth at night following spawning squid; accessible from shore or by small boat during March–June." },
+    ]),
+    communityTips: JSON.stringify([
+      { category: "Timing", tip: "Mid-March through June is prime when spawning squid runs push WSB into SD kelp beds at night. La Jolla and Point Loma kelp edges go active after dark — this is when locals score the biggest fish of the year." },
+      { category: "Local Trick", tip: "Drift live squid along the kelp edge at night with 4–6 oz of weight. Use a 9/0 J-hook through the mantle and let the squid swim naturally. Listen for 'the knock' — WSB often tap before committing, so don't set the hook too early." },
+      { category: "Bait Shop", tip: "H&M Landing and Seaforth Sportfishing are the primary departure points for WSB trips. Both sell live squid when the run is on — call ahead as squid availability is tide and season dependent. Arrive early: squid goes fast." },
+      { category: "SD Tip", tip: "The bag limit drops to 1 fish March 15–June 15 — exactly peak season. Many local anglers practice voluntary catch-and-release during the spawn. Check the SD Sportfishing Association reports for real-time squid run updates." },
+    ]),
+    communityPosts: JSON.stringify([
+      { username: "NightOwl_WSB", date: "Apr 18, 2024", time: "11:30 PM", location: "La Jolla Kelp edge", weight: "31 lbs", bait: "Live squid, 9/0 J-hook", tide: "Outgoing", note: "Heard the knock, counted to 3, set the hook. Pure adrenaline. Released to fight again." },
+      { username: "SquidRun_SD", date: "May 2, 2024", time: "10:15 PM", location: "Point Loma kelp line", weight: "24 lbs", gear: "Dropper loop, 5oz lead, live squid", waterTemp: "62°F" },
+      { username: "KelpLineKing", date: "Mar 29, 2024", time: "9:45 PM", location: "Mission Bay channel entrance", weight: "18 lbs", bait: "Live squid", tide: "Incoming", note: "First WSB of the season. Squid were thick in the channel. Shore caught!" },
+    ]),
   },
 ];
 

@@ -26,6 +26,10 @@ export interface Species extends SpeciesListItem {
   visionAndColor: string;
   filletRules: string;
   mustKnow: string;
+  locations: string | null;
+  communityTips: string | null;
+  communityPosts: string | null;
+  stockStatus: { summary: string; scannedAt: string } | null;
   createdAt: string;
   updatedAt: string;
 }

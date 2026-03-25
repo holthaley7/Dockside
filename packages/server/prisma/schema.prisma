@@ -30,6 +30,9 @@ model Species {
   visionAndColor    String   @db.Text
   filletRules       String   @db.Text
   mustKnow          String   @db.Text
+  locations         String?  @db.Text
+  communityTips     String?  @db.Text
+  communityPosts    String?  @db.Text
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 

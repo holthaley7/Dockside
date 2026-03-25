@@ -139,7 +139,7 @@ export default function Home() {
                     </span>
                   </div>
                 </div>
-                <div className="grid grid-cols-4 gap-2 text-[11px] font-mono">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] font-mono">
                   <div>
                     <span className="text-gray-600 block mb-0.5">Season</span>
                     <span className="text-gray-400">{s.peakSeason}</span>

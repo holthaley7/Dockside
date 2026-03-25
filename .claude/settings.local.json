@@ -92,7 +92,10 @@
       "Bash(python3 -m json.tool)",
       "Bash(curl --version)",
       "WebFetch(domain:www.flickr.com)",
-      "WebFetch(domain:media.fisheries.noaa.gov)"
+      "WebFetch(domain:media.fisheries.noaa.gov)",
+      "Bash(grep -n \"communityTips: JSON\\\\|  },\\\\n  {\" c:/Users/holth/Dockside/packages/server/prisma/seed.ts)",
+      "Bash(curl -s http://localhost:3001/api/species/vermilion-sunset-rockfish)",
+      "Bash(findstr /c:\"communityPosts\")"
     ]
   }
 }

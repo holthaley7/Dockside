@@ -18,28 +18,27 @@ function ConditionsBar({ data }: { data: RecommendationsResponse }) {
   const { conditions } = data;
 
   return (
-    <div className="flex flex-wrap gap-3 mb-6">
+    <div className="flex gap-2 mb-6">
       {conditions.waterTemp && (
-        <div className="flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-3 py-2">
-          <span className="text-sm">🌡️</span>
-          <div>
+        <div className="flex-1 min-w-0 flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-4 py-3">
+          <span className="text-base flex-shrink-0">🌡️</span>
+          <div className="min-w-0">
             <span className="text-xs font-mono text-gray-500 block">Water Temp</span>
-            <span className="text-sm font-mono text-gray-200">
+            <span className="text-base font-mono text-gray-200 block truncate">
               {conditions.waterTemp.fahrenheit.toFixed(0)}°F
             </span>
           </div>
         </div>
       )}
-      <div className="flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-3 py-2">
-        <span className="text-sm">🌊</span>
-        <div>
+      <div className="flex-1 min-w-0 flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-4 py-3">
+        <span className="text-base flex-shrink-0">🌊</span>
+        <div className="min-w-0">
           <span className="text-xs font-mono text-gray-500 block">Tide</span>
-          <span className="text-sm font-mono text-gray-200 capitalize">
+          <span className="text-base font-mono text-gray-200 block truncate capitalize">
             {conditions.currentTideState}
             {conditions.nextTide && (
               <span className="text-gray-500">
-                {" "}· next {conditions.nextTide.type === "H" ? "high" : "low"} at{" "}
-                {conditions.nextTide.time}
+                {" "}· Next {conditions.nextTide.type === "H" ? "High" : "Low"} At {conditions.nextTide.time}
               </span>
             )}
           </span>
@@ -47,20 +46,20 @@ function ConditionsBar({ data }: { data: RecommendationsResponse }) {
       </div>
       {conditions.weather && (
         <>
-          <div className="flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-3 py-2">
-            <span className="text-sm">☀️</span>
-            <div>
+          <div className="flex-1 min-w-0 flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-4 py-3">
+            <span className="text-base flex-shrink-0">☀️</span>
+            <div className="min-w-0">
               <span className="text-xs font-mono text-gray-500 block">Weather</span>
-              <span className="text-sm font-mono text-gray-200">
+              <span className="text-base font-mono text-gray-200 block truncate">
                 {conditions.weather.temperature}°F · {conditions.weather.shortForecast}
               </span>
             </div>
           </div>
-          <div className="flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-3 py-2">
-            <span className="text-sm">💨</span>
-            <div>
+          <div className="flex-1 min-w-0 flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-4 py-3">
+            <span className="text-base flex-shrink-0">💨</span>
+            <div className="min-w-0">
               <span className="text-xs font-mono text-gray-500 block">Wind</span>
-              <span className="text-sm font-mono text-gray-200">
+              <span className="text-base font-mono text-gray-200 block truncate">
                 {conditions.weather.windSpeed} {conditions.weather.windDirection}
               </span>
             </div>
@@ -80,7 +79,7 @@ function ScoreBreakdown({ factors }: { factors: ScoredSpecies["factors"] }) {
   ];
 
   return (
-    <div className="mt-3 pt-3 border-t border-navy-700/30 grid grid-cols-2 gap-2">
+    <div className="mt-3 pt-3 border-t border-navy-700/30 grid grid-cols-1 sm:grid-cols-2 gap-2">
       {items.map((item) => (
         <div key={item.label} className="flex items-center gap-2">
           <div className="w-16 bg-navy-900 rounded-full h-1.5 overflow-hidden">
@@ -167,7 +166,7 @@ function RecommendationCard({ species }: { species: ScoredSpecies }) {
               onClick={() => setExpanded(!expanded)}
               className="text-xs font-mono text-sand/60 hover:text-sand transition-colors"
             >
-              {expanded ? "hide" : "breakdown"}
+              {expanded ? "hide" : "Breakdown"}
             </button>
           </div>
         </div>
@@ -229,7 +228,7 @@ export default function WhatsBiting() {
 
   return (
     <div className="bg-navy-800/30 border border-sand/10 rounded-2xl p-6 mb-10">
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
         <div>
           <h2 className="text-3xl font-bold text-gray-100">
             What's Biting Now
@@ -238,7 +237,7 @@ export default function WhatsBiting() {
             Live conditions · Scored against each species' preferences · Updates every 5 min
           </p>
         </div>
-        <div className="text-right">
+        <div className="sm:text-right">
           <p className="text-[9px] font-mono text-gray-600">
             Data from NOAA Tides · NDBC Buoy · NWS Weather
           </p>

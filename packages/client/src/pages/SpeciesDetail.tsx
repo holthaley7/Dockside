@@ -170,6 +170,25 @@ export default function SpeciesDetail() {
               {species.idealDepths}
             </p>
           </div>
+
+          {species.locations && (() => {
+            const locs: { name: string; note: string }[] = JSON.parse(species.locations);
+            return (
+              <div className="bg-navy-800/40 border border-navy-700/40 rounded-xl p-6">
+                <h3 className="text-sm font-mono text-sand uppercase tracking-wider mb-4">
+                  📍 Where to Find Them in San Diego
+                </h3>
+                <div className={`grid gap-3 ${compact ? "grid-cols-1" : "grid-cols-1 sm:grid-cols-2"}`}>
+                  {locs.map((loc) => (
+                    <div key={loc.name} className="bg-navy-900/50 border border-navy-700/30 rounded-lg p-4">
+                      <p className="text-sm font-semibold text-gray-100 mb-1">{loc.name}</p>
+                      <p className="text-xs text-gray-400 leading-relaxed">{loc.note}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
         </div>
       )}
 
@@ -243,6 +262,21 @@ export default function SpeciesDetail() {
             </p>
           </div>
 
+          {species.stockStatus && (
+            <div className="bg-navy-800/40 border border-navy-700/40 rounded-xl p-5 flex items-start justify-between gap-4">
+              <div>
+                <h3 className="text-sm font-mono text-sand uppercase tracking-wider mb-1">
+                  NOAA Stock Status
+                </h3>
+                <p className="text-sm text-gray-300">{species.stockStatus.summary}</p>
+              </div>
+              <p className="text-[10px] font-mono text-gray-600 flex-shrink-0 text-right">
+                via FishWatch<br />
+                {new Date(species.stockStatus.scannedAt).toLocaleDateString()}
+              </p>
+            </div>
+          )}
+
           <p className="text-xs font-mono text-gray-600">
             Last verified: {new Date(species.updatedAt).toLocaleDateString()} &middot;{" "}
             <a
@@ -258,13 +292,93 @@ export default function SpeciesDetail() {
       )}
 
       {tab === "community" && (
-        <div className="text-center py-16">
-          <p className="text-gray-500 font-mono text-sm mb-2">
-            Community features coming in Phase 3
-          </p>
-          <p className="text-gray-600 font-mono text-xs">
-            Catch reports, tips, and discussion threads
-          </p>
+        <div className="space-y-5">
+          {species.communityPosts ? (
+            (() => {
+              const posts: {
+                username: string;
+                date: string;
+                time?: string;
+                location: string;
+                weight: string;
+                bait?: string;
+                gear?: string;
+                tide?: string;
+                waterTemp?: string;
+                note?: string;
+              }[] = JSON.parse(species.communityPosts);
+
+              return posts.map((post, i) => (
+                <div key={i} className="bg-navy-800/50 border border-navy-700/50 rounded-xl overflow-hidden">
+                  {/* Photo area */}
+                  <div className="h-40 bg-navy-950 flex items-center justify-center relative overflow-hidden">
+                    {species.imageUrl ? (
+                      <img
+                        src={species.imageUrl}
+                        alt={species.name}
+                        className="w-full h-full object-contain p-4 opacity-60"
+                      />
+                    ) : (
+                      <span className="text-6xl opacity-40">{species.icon}</span>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 to-transparent" />
+                    <div className="absolute bottom-3 left-4">
+                      <span className="text-lg font-bold text-white">{post.weight}</span>
+                    </div>
+                  </div>
+
+                  {/* Post body */}
+                  <div className="p-4 space-y-3">
+                    {/* Header */}
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-semibold text-sand">@{post.username}</span>
+                      <span className="text-xs font-mono text-gray-500">
+                        {post.date}{post.time ? ` · ${post.time}` : ""}
+                      </span>
+                    </div>
+
+                    {/* Location */}
+                    <p className="text-xs font-mono text-gray-400 flex items-center gap-1">
+                      <span>📍</span> {post.location}
+                    </p>
+
+                    {/* Stats chips */}
+                    <div className="flex flex-wrap gap-2">
+                      {post.bait && (
+                        <span className="text-xs font-mono px-2 py-0.5 rounded bg-navy-900/80 text-gray-300 border border-navy-700/40">
+                          🪱 {post.bait}
+                        </span>
+                      )}
+                      {post.gear && (
+                        <span className="text-xs font-mono px-2 py-0.5 rounded bg-navy-900/80 text-gray-300 border border-navy-700/40">
+                          🎣 {post.gear}
+                        </span>
+                      )}
+                      {post.tide && (
+                        <span className="text-xs font-mono px-2 py-0.5 rounded bg-navy-900/80 text-gray-300 border border-navy-700/40">
+                          🌊 {post.tide}
+                        </span>
+                      )}
+                      {post.waterTemp && (
+                        <span className="text-xs font-mono px-2 py-0.5 rounded bg-navy-900/80 text-gray-300 border border-navy-700/40">
+                          🌡️ {post.waterTemp}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Note */}
+                    {post.note && (
+                      <p className="text-sm text-gray-300 leading-relaxed border-t border-navy-700/30 pt-3">
+                        "{post.note}"
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ));
+            })()
+          ) : (
+            <p className="text-gray-500 font-mono text-sm">No catch reports yet.</p>
+          )}
         </div>
       )}
     </div>
