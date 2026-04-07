@@ -16,56 +16,64 @@ const ratingConfig = {
 
 function ConditionsBar({ data }: { data: RecommendationsResponse }) {
   const { conditions } = data;
+  const w = conditions.weather;
 
   return (
-    <div className="flex gap-2 mb-6">
-      {conditions.waterTemp && (
+    <div className="space-y-2 mb-6">
+      {/* Location label */}
+      <p className="text-[10px] font-mono text-gray-600 uppercase tracking-widest">
+        📍 {conditions.location ?? "San Diego, CA"}
+      </p>
+
+      <div className="flex gap-2">
+        {/* Water temp */}
         <div className="flex-1 min-w-0 flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-4 py-3">
           <span className="text-base flex-shrink-0">🌡️</span>
           <div className="min-w-0">
             <span className="text-xs font-mono text-gray-500 block">Water Temp</span>
             <span className="text-base font-mono text-gray-200 block truncate">
-              {conditions.waterTemp.fahrenheit.toFixed(0)}°F
+              {conditions.waterTemp
+                ? `${conditions.waterTemp.fahrenheit.toFixed(0)}°F`
+                : "Unavailable"}
             </span>
           </div>
         </div>
-      )}
-      <div className="flex-1 min-w-0 flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-4 py-3">
-        <span className="text-base flex-shrink-0">🌊</span>
-        <div className="min-w-0">
-          <span className="text-xs font-mono text-gray-500 block">Tide</span>
-          <span className="text-base font-mono text-gray-200 block truncate capitalize">
-            {conditions.currentTideState}
-            {conditions.nextTide && (
-              <span className="text-gray-500">
-                {" "}· Next {conditions.nextTide.type === "H" ? "High" : "Low"} At {conditions.nextTide.time}
-              </span>
-            )}
-          </span>
+
+        {/* Tide */}
+        <div className="flex-1 min-w-0 flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-4 py-3">
+          <span className="text-base flex-shrink-0">🌊</span>
+          <div className="min-w-0">
+            <span className="text-xs font-mono text-gray-500 block">Tide</span>
+            <span className="text-base font-mono text-gray-200 block truncate capitalize">
+              {conditions.currentTideState !== "unknown"
+                ? conditions.currentTideState
+                : "Unavailable"}
+            </span>
+          </div>
+        </div>
+
+        {/* Air temp / weather */}
+        <div className="flex-1 min-w-0 flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-4 py-3">
+          <span className="text-base flex-shrink-0">☀️</span>
+          <div className="min-w-0">
+            <span className="text-xs font-mono text-gray-500 block">Weather</span>
+            <span className="text-base font-mono text-gray-200 block truncate">
+              {w ? `${w.temperature}°F · ${w.shortForecast}` : "Unavailable"}
+            </span>
+          </div>
+        </div>
+
+        {/* Wind */}
+        <div className="flex-1 min-w-0 flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-4 py-3">
+          <span className="text-base flex-shrink-0">💨</span>
+          <div className="min-w-0">
+            <span className="text-xs font-mono text-gray-500 block">Wind</span>
+            <span className="text-base font-mono text-gray-200 block truncate">
+              {w ? `${w.windSpeed} ${w.windDirection}` : "Unavailable"}
+            </span>
+          </div>
         </div>
       </div>
-      {conditions.weather && (
-        <>
-          <div className="flex-1 min-w-0 flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-4 py-3">
-            <span className="text-base flex-shrink-0">☀️</span>
-            <div className="min-w-0">
-              <span className="text-xs font-mono text-gray-500 block">Weather</span>
-              <span className="text-base font-mono text-gray-200 block truncate">
-                {conditions.weather.temperature}°F · {conditions.weather.shortForecast}
-              </span>
-            </div>
-          </div>
-          <div className="flex-1 min-w-0 flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-4 py-3">
-            <span className="text-base flex-shrink-0">💨</span>
-            <div className="min-w-0">
-              <span className="text-xs font-mono text-gray-500 block">Wind</span>
-              <span className="text-base font-mono text-gray-200 block truncate">
-                {conditions.weather.windSpeed} {conditions.weather.windDirection}
-              </span>
-            </div>
-          </div>
-        </>
-      )}
     </div>
   );
 }

@@ -183,6 +183,43 @@ export default function Rules() {
         </p>
       </div>
 
+      {/* ── CDFW Disclaimer Banner ── */}
+      <div className="mb-8 bg-amber-950/40 border border-amber-700/50 rounded-xl p-5">
+        <div className="flex items-start gap-3">
+          <span className="text-amber-400 text-xl flex-shrink-0 mt-0.5">⚠️</span>
+          <div>
+            <p className="text-sm font-semibold text-amber-300 mb-1">
+              Regulations change — always verify before you fish
+            </p>
+            <p className="text-xs text-amber-200/70 leading-relaxed">
+              The information on this page is provided for reference only and may not reflect the
+              most current California Department of Fish and Wildlife (CDFW) regulations. Bag
+              limits, size limits, season dates, and gear restrictions are subject to change at any
+              time. <strong className="text-amber-300">Always confirm current regulations with CDFW
+              directly before your trip.</strong>
+            </p>
+            <div className="flex flex-wrap gap-3 mt-3">
+              <a
+                href="https://wildlife.ca.gov/Regulations/Sport-Fish"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-mono text-amber-400 hover:text-amber-300 transition-colors underline underline-offset-2"
+              >
+                CDFW Sport Fish Regulations →
+              </a>
+              <a
+                href="https://wildlife.ca.gov/Licensing/Fishing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-mono text-amber-400 hover:text-amber-300 transition-colors underline underline-offset-2"
+              >
+                Buy a CA Fishing License →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* ── Quick Reference Bar ── */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-12">
         {quickRefs.map((ref) => (

@@ -153,22 +153,22 @@ function scoreTide(
 
   // Direct match checks
   if (ideal.includes("incoming") && state.includes("incoming")) {
-    return { score: 25, detail: `Incoming tide matches ideal (${idealTides})` };
+    return { score: 25, detail: "Incoming tide — matches ideal" };
   }
   if (ideal.includes("outgoing") && state.includes("outgoing")) {
-    return { score: 25, detail: `Outgoing tide matches ideal (${idealTides})` };
+    return { score: 25, detail: "Outgoing tide — matches ideal" };
   }
   if (ideal.includes("slack") && state.includes("slack")) {
-    return { score: 25, detail: `Slack tide matches ideal (${idealTides})` };
+    return { score: 25, detail: "Slack tide — matches ideal" };
   }
   if (ideal.includes("high") && state.includes("incoming")) {
-    return { score: 18, detail: `Incoming toward high — good for species wanting high tides` };
+    return { score: 18, detail: "Incoming tide — good for rising water" };
   }
   if (ideal.includes("not as particular")) {
-    return { score: 18, detail: "Not tide-sensitive — any tide works" };
+    return { score: 18, detail: "Not tide-sensitive" };
   }
   if (ideal.includes("low") && state.includes("outgoing")) {
-    return { score: 18, detail: "Outgoing toward low — good for lure fishing" };
+    return { score: 18, detail: "Outgoing tide — good for lure fishing" };
   }
 
   // Partial matches
@@ -176,10 +176,10 @@ function scoreTide(
     (ideal.includes("outgoing") || ideal.includes("slack")) &&
     (state.includes("outgoing") || state.includes("slack"))
   ) {
-    return { score: 20, detail: `${currentState} tide partially matches (${idealTides})` };
+    return { score: 20, detail: `${currentState} tide — partial match` };
   }
 
-  return { score: 8, detail: `Current: ${currentState}. Ideal: ${idealTides}` };
+  return { score: 8, detail: `${currentState} tide — not ideal` };
 }
 
 function scoreTimeOfDay(primeHour: string): { score: number; detail: string } {
@@ -247,10 +247,14 @@ export function scoreSpecies(
       else if (score >= 25) rating = "fair";
       else rating = "poor";
 
-      // Generate a concise reason
-      const topFactor = [season, waterTemp, tide, timeOfDay].sort(
-        (a, b) => b.score - a.score
-      )[0];
+      // Generate a concise reason — always "[Category] · [detail]"
+      const labeledFactors = [
+        { label: "Season", ...season },
+        { label: "Water temp", ...waterTemp },
+        { label: "Tide", ...tide },
+        { label: "Time", ...timeOfDay },
+      ];
+      const topFactor = [...labeledFactors].sort((a, b) => b.score - a.score)[0];
 
       return {
         id: s.id,
@@ -264,7 +268,7 @@ export function scoreSpecies(
         bagLimit: s.bagLimit,
         score,
         rating,
-        reason: topFactor.detail,
+        reason: `${topFactor.label} · ${topFactor.detail}`,
         factors: { season, waterTemp, tide, timeOfDay },
       };
     })

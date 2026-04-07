@@ -33,6 +33,7 @@ model Species {
   locations         String?  @db.Text
   communityTips     String?  @db.Text
   communityPosts    String?  @db.Text
+  maxWeightLbs      Float?   // used to validate community catch submissions
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 
@@ -91,23 +92,26 @@ model User {
 
 model CatchReport {
   id                  String   @id @default(cuid())
-  userId              String
-  user                User     @relation(fields: [userId], references: [id])
+  // Anonymous submission — userId optional (no auth required)
+  userId              String?
+  user                User?    @relation(fields: [userId], references: [id])
+  username            String   // display name entered in form
   speciesId           String
   species             Species  @relation(fields: [speciesId], references: [id])
   dateCaught          DateTime
-  locationLat         Float?
-  locationLng         Float?
-  locationDescription String?
-  sizeCaught          String?
+  timeCaught          String?  // "HH:MM" from the time picker
+  locationName        String?  // preset location name from dropdown
+  locationOther       String?  // free-text when "Other" is selected
+  weightLbs           Float
+  lengthIn            Float?
   baitUsed            String?
-  gearUsed            String?
-  tideConditions      String?
-  waterTempObserved   String?
-  timeOfDay           String?
-  weatherConditions   String?
+  tideConditions      String?  // "Incoming High" | "Incoming Low" | "Outgoing High" | "Outgoing Low" | "Slack"
+  waterTempF          Float?
+  weatherConditions   String?  // "Sunny" | "Partly Cloudy" | "Overcast" | "Foggy" | "Windy"
   notes               String?  @db.Text
   photoUrl            String?
+  catchAndRelease     Boolean  @default(false)
+  flagged             Boolean  @default(false)
   verified            Boolean  @default(false)
   createdAt           DateTime @default(now())
 
