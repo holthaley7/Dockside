@@ -369,14 +369,12 @@ app.post("/api/admin/refresh-fishwatch", async (_req, res) => {
 const MS_PER_HOUR = 60 * 60 * 1000;
 const FISHWATCH_REFRESH_INTERVAL = 24 * MS_PER_HOUR;
 
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(PORT, () => {
-    console.log(`Dockside API running on http://localhost:${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Dockside API running on http://localhost:${PORT}`);
+  refreshFishWatchData(prisma).catch(console.error);
+  setInterval(() => {
     refreshFishWatchData(prisma).catch(console.error);
-    setInterval(() => {
-      refreshFishWatchData(prisma).catch(console.error);
-    }, FISHWATCH_REFRESH_INTERVAL);
-  });
-}
+  }, FISHWATCH_REFRESH_INTERVAL);
+});
 
 export default app;
