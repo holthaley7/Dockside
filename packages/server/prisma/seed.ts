@@ -334,7 +334,7 @@ const speciesData = [
   {
     name: "Spotted Sand Bass",
     icon: "🐠",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Paralabrax_maculatofasciatus.jpg",
+    imageUrl: "https://inaturalist-open-data.s3.amazonaws.com/photos/627535246/large.jpg",
     color: "#6B8E23",
     zone: Zone.NEARSHORE,
     season: "Year-round",
