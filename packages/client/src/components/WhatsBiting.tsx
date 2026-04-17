@@ -25,13 +25,13 @@ function ConditionsBar({ data }: { data: RecommendationsResponse }) {
         📍 {conditions.location ?? "San Diego, CA"}
       </p>
 
-      <div className="flex gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
         {/* Water temp */}
-        <div className="flex-1 min-w-0 flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-4 py-3">
+        <div className="flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-3 py-3">
           <span className="text-base flex-shrink-0">🌡️</span>
           <div className="min-w-0">
             <span className="text-xs font-mono text-gray-500 block">Water Temp</span>
-            <span className="text-base font-mono text-gray-200 block truncate">
+            <span className="text-sm font-mono text-gray-200 block truncate">
               {conditions.waterTemp
                 ? `${conditions.waterTemp.fahrenheit.toFixed(0)}°F`
                 : "Unavailable"}
@@ -40,11 +40,11 @@ function ConditionsBar({ data }: { data: RecommendationsResponse }) {
         </div>
 
         {/* Tide */}
-        <div className="flex-1 min-w-0 flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-4 py-3">
+        <div className="flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-3 py-3">
           <span className="text-base flex-shrink-0">🌊</span>
           <div className="min-w-0">
             <span className="text-xs font-mono text-gray-500 block">Tide</span>
-            <span className="text-base font-mono text-gray-200 block truncate capitalize">
+            <span className="text-sm font-mono text-gray-200 block truncate capitalize">
               {conditions.currentTideState !== "unknown"
                 ? conditions.currentTideState
                 : "Unavailable"}
@@ -53,23 +53,29 @@ function ConditionsBar({ data }: { data: RecommendationsResponse }) {
         </div>
 
         {/* Air temp / weather */}
-        <div className="flex-1 min-w-0 flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-4 py-3">
+        <div className="flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-3 py-3">
           <span className="text-base flex-shrink-0">☀️</span>
           <div className="min-w-0">
             <span className="text-xs font-mono text-gray-500 block">Weather</span>
-            <span className="text-base font-mono text-gray-200 block truncate">
-              {w ? `${w.temperature}°F · ${w.shortForecast}` : "Unavailable"}
+            <span className="text-sm font-mono text-gray-200 block truncate">
+              {w ? `${w.temperature}°F` : "Unavailable"}
+            </span>
+            <span className="text-[10px] font-mono text-gray-500 block truncate">
+              {w ? w.shortForecast : ""}
             </span>
           </div>
         </div>
 
         {/* Wind */}
-        <div className="flex-1 min-w-0 flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-4 py-3">
+        <div className="flex items-center gap-2 bg-navy-800/60 border border-navy-700/40 rounded-lg px-3 py-3">
           <span className="text-base flex-shrink-0">💨</span>
           <div className="min-w-0">
             <span className="text-xs font-mono text-gray-500 block">Wind</span>
-            <span className="text-base font-mono text-gray-200 block truncate">
-              {w ? `${w.windSpeed} ${w.windDirection}` : "Unavailable"}
+            <span className="text-sm font-mono text-gray-200 block truncate">
+              {w ? `${w.windSpeed}` : "Unavailable"}
+            </span>
+            <span className="text-[10px] font-mono text-gray-500 block truncate">
+              {w ? w.windDirection : ""}
             </span>
           </div>
         </div>
@@ -132,9 +138,9 @@ function RecommendationCard({ species }: { species: ScoredSpecies }) {
         </Link>
 
         {/* Info */}
-        <div className="flex-1 p-4 flex gap-3 min-w-0">
+        <div className="flex-1 p-3 sm:p-4 flex gap-3 min-w-0 overflow-hidden">
           {/* Left: name, reason, stats */}
-          <div className="flex-1 flex flex-col gap-3 min-w-0">
+          <div className="flex-1 flex flex-col gap-2 sm:gap-3 min-w-0 overflow-hidden">
             <Link to={`/species/${species.slug}`} className="group min-w-0">
               <h4 className="text-lg font-semibold text-gray-100 group-hover:text-sand transition-colors leading-tight truncate">
                 {species.name}
@@ -144,17 +150,17 @@ function RecommendationCard({ species }: { species: ScoredSpecies }) {
               {species.reason}
             </p>
             <div className="grid grid-cols-3 gap-2">
-              <div className="bg-navy-900/60 rounded px-2 py-1">
+              <div className="bg-navy-900/60 rounded px-2 py-1 min-w-0">
                 <span className="text-[10px] font-mono text-gray-600 uppercase tracking-wide block">Zone</span>
-                <span className="text-xs font-mono text-gray-300 capitalize">{species.zone.toLowerCase()}</span>
+                <span className="text-xs font-mono text-gray-300 capitalize truncate block">{species.zone.toLowerCase()}</span>
               </div>
-              <div className="bg-navy-900/60 rounded px-2 py-1">
+              <div className="bg-navy-900/60 rounded px-2 py-1 min-w-0">
                 <span className="text-[10px] font-mono text-gray-600 uppercase tracking-wide block">Avg Size</span>
-                <span className="text-xs font-mono text-gray-300">{species.avgSize}</span>
+                <span className="text-xs font-mono text-gray-300 truncate block">{species.avgSize}</span>
               </div>
-              <div className="bg-navy-900/60 rounded px-2 py-1">
+              <div className="bg-navy-900/60 rounded px-2 py-1 min-w-0">
                 <span className="text-[10px] font-mono text-gray-600 uppercase tracking-wide block">Limit</span>
-                <span className="text-xs font-mono text-gray-300">{species.bagLimit}</span>
+                <span className="text-xs font-mono text-gray-300 truncate block">{species.bagLimit}</span>
               </div>
             </div>
             {expanded && <ScoreBreakdown factors={species.factors} />}
