@@ -140,21 +140,21 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] font-mono">
-                  <div className="min-w-0">
+                  <div>
                     <span className="text-gray-600 block mb-0.5">Season</span>
-                    <span className="text-gray-400 truncate block">{s.peakSeason}</span>
+                    <span className="text-gray-400">{s.peakSeason}</span>
                   </div>
-                  <div className="min-w-0">
+                  <div>
                     <span className="text-gray-600 block mb-0.5">Avg size</span>
-                    <span className="text-gray-400 truncate block">{s.avgSize}</span>
+                    <span className="text-gray-400">{s.avgSize}</span>
                   </div>
-                  <div className="min-w-0">
+                  <div>
                     <span className="text-gray-600 block mb-0.5">Bag limit</span>
-                    <span className="text-gray-400 truncate block">{s.bagLimit}</span>
+                    <span className="text-gray-400">{s.bagLimit}</span>
                   </div>
-                  <div className="min-w-0">
+                  <div>
                     <span className="text-gray-600 block mb-0.5">Water</span>
-                    <span className="text-gray-400 truncate block">{s.waterTemp}</span>
+                    <span className="text-gray-400">{s.waterTemp}</span>
                   </div>
                 </div>
               </Link>

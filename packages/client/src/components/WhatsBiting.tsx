@@ -138,9 +138,9 @@ function RecommendationCard({ species }: { species: ScoredSpecies }) {
         </Link>
 
         {/* Info */}
-        <div className="flex-1 p-3 sm:p-4 flex gap-3 min-w-0 overflow-hidden">
+        <div className="flex-1 p-3 sm:p-4 flex gap-3 min-w-0">
           {/* Left: name, reason, stats */}
-          <div className="flex-1 flex flex-col gap-2 sm:gap-3 min-w-0 overflow-hidden">
+          <div className="flex-1 flex flex-col gap-2 sm:gap-3 min-w-0">
             <Link to={`/species/${species.slug}`} className="group min-w-0">
               <h4 className="text-lg font-semibold text-gray-100 group-hover:text-sand transition-colors leading-tight truncate">
                 {species.name}
@@ -150,17 +150,17 @@ function RecommendationCard({ species }: { species: ScoredSpecies }) {
               {species.reason}
             </p>
             <div className="grid grid-cols-3 gap-2">
-              <div className="bg-navy-900/60 rounded px-2 py-1 min-w-0">
+              <div className="bg-navy-900/60 rounded px-2 py-1">
                 <span className="text-[10px] font-mono text-gray-600 uppercase tracking-wide block">Zone</span>
-                <span className="text-xs font-mono text-gray-300 capitalize truncate block">{species.zone.toLowerCase()}</span>
+                <span className="text-xs font-mono text-gray-300 capitalize">{species.zone.toLowerCase()}</span>
               </div>
-              <div className="bg-navy-900/60 rounded px-2 py-1 min-w-0">
+              <div className="bg-navy-900/60 rounded px-2 py-1">
                 <span className="text-[10px] font-mono text-gray-600 uppercase tracking-wide block">Avg Size</span>
-                <span className="text-xs font-mono text-gray-300 truncate block">{species.avgSize}</span>
+                <span className="text-xs font-mono text-gray-300">{species.avgSize}</span>
               </div>
-              <div className="bg-navy-900/60 rounded px-2 py-1 min-w-0">
+              <div className="bg-navy-900/60 rounded px-2 py-1">
                 <span className="text-[10px] font-mono text-gray-600 uppercase tracking-wide block">Limit</span>
-                <span className="text-xs font-mono text-gray-300 truncate block">{species.bagLimit}</span>
+                <span className="text-xs font-mono text-gray-300">{species.bagLimit}</span>
               </div>
             </div>
             {expanded && <ScoreBreakdown factors={species.factors} />}
