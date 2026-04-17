@@ -139,10 +139,14 @@ export default function Layout() {
       </main>
 
       <footer className="border-t border-navy-700/20 py-5 mt-16">
-        <div className="max-w-5xl mx-auto px-4 text-center">
+        <div className="max-w-5xl mx-auto px-4 text-center space-y-1">
           <p className="text-[10px] font-mono text-gray-700">
             Dockside &middot; San Diego Sport Fishing Intelligence &middot;{" "}
             {new Date().getFullYear()}
+          </p>
+          {/* Update this date whenever regulations are re-audited */}
+          <p className="text-[10px] font-mono text-gray-600">
+            Regulations last verified: April 16, 2026
           </p>
         </div>
       </footer>
