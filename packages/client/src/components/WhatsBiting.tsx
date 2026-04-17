@@ -138,51 +138,52 @@ function RecommendationCard({ species }: { species: ScoredSpecies }) {
         </Link>
 
         {/* Info */}
-        <div className="flex-1 p-3 sm:p-4 flex gap-3 min-w-0">
-          {/* Left: name, reason, stats */}
-          <div className="flex-1 flex flex-col gap-2 sm:gap-3 min-w-0">
-            <Link to={`/species/${species.slug}`} className="group min-w-0">
+        <div className="flex-1 p-3 sm:p-4 flex flex-col gap-2">
+          {/* Row 1: name + score side by side */}
+          <div className="flex items-start justify-between gap-2">
+            <Link to={`/species/${species.slug}`} className="group flex-1 min-w-0">
               <h4 className="text-lg font-semibold text-gray-100 group-hover:text-sand transition-colors leading-tight">
                 {species.name}
               </h4>
             </Link>
-            <p className="text-sm font-mono text-gray-400">
-              {species.reason}
-            </p>
-            <div className="flex gap-2 w-full">
-              <div className="flex-1 bg-navy-900/60 rounded px-2 py-1">
-                <span className="text-[10px] font-mono text-gray-600 uppercase tracking-wide block">Zone</span>
-                <span className="text-xs font-mono text-gray-300 capitalize">{species.zone.toLowerCase()}</span>
+            <div className="flex flex-col items-end gap-1 flex-shrink-0">
+              <div className="flex items-center gap-2">
+                <span className="text-2xl font-bold font-mono text-gray-200 leading-none">
+                  {species.score}
+                </span>
+                <span className={`text-xs font-mono px-2 py-0.5 rounded-full border ${config.bg} ${config.text} ${config.border}`}>
+                  {config.label}
+                </span>
               </div>
-              <div className="flex-1 bg-navy-900/60 rounded px-2 py-1">
-                <span className="text-[10px] font-mono text-gray-600 uppercase tracking-wide block">Avg Size</span>
-                <span className="text-xs font-mono text-gray-300">{species.avgSize}</span>
-              </div>
-              <div className="flex-1 bg-navy-900/60 rounded px-2 py-1">
-                <span className="text-[10px] font-mono text-gray-600 uppercase tracking-wide block">Limit</span>
-                <span className="text-xs font-mono text-gray-300">{species.bagLimit}</span>
-              </div>
+              <button
+                onClick={() => setExpanded(!expanded)}
+                className="text-xs font-mono text-sand/60 hover:text-sand transition-colors"
+              >
+                {expanded ? "hide" : "Breakdown"}
+              </button>
             </div>
-            {expanded && <ScoreBreakdown factors={species.factors} />}
           </div>
 
-          {/* Right: score, rating, breakdown */}
-          <div className="flex flex-col items-end gap-1 flex-shrink-0">
-            <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold font-mono text-gray-200 leading-none">
-                {species.score}
-              </span>
-              <span className={`text-xs font-mono px-2 py-0.5 rounded-full border ${config.bg} ${config.text} ${config.border}`}>
-                {config.label}
-              </span>
+          {/* Row 2: reason */}
+          <p className="text-sm font-mono text-gray-400">{species.reason}</p>
+
+          {/* Row 3: stats — full width */}
+          <div className="flex gap-2">
+            <div className="flex-1 bg-navy-900/60 rounded px-2 py-1">
+              <span className="text-[10px] font-mono text-gray-600 uppercase tracking-wide block">Zone</span>
+              <span className="text-xs font-mono text-gray-300 capitalize">{species.zone.toLowerCase()}</span>
             </div>
-            <button
-              onClick={() => setExpanded(!expanded)}
-              className="text-xs font-mono text-sand/60 hover:text-sand transition-colors"
-            >
-              {expanded ? "hide" : "Breakdown"}
-            </button>
+            <div className="flex-1 bg-navy-900/60 rounded px-2 py-1">
+              <span className="text-[10px] font-mono text-gray-600 uppercase tracking-wide block">Avg Size</span>
+              <span className="text-xs font-mono text-gray-300">{species.avgSize}</span>
+            </div>
+            <div className="flex-1 bg-navy-900/60 rounded px-2 py-1">
+              <span className="text-[10px] font-mono text-gray-600 uppercase tracking-wide block">Limit</span>
+              <span className="text-xs font-mono text-gray-300">{species.bagLimit}</span>
+            </div>
           </div>
+
+          {expanded && <ScoreBreakdown factors={species.factors} />}
         </div>
       </div>
     </div>
